@@ -1,0 +1,270 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+- name: Cache
+  uses: actions/cache@v5.1.0
+  with:
+    # A list of files, directories, and wildcard patterns to cache and restore
+    path: 
+    # An explicit key for restoring and saving the cache
+    key: 
+    # An ordered multiline string listing the prefix-matched keys, that are used for restoring stale cache if no cache hit occurred for key. Note `cache-hit` returns false in this case.
+    restore-keys: # optional
+    # The chunk size used to split up large files during upload, in bytes
+    upload-chunk-size: # optional
+    # An optional boolean when enabled, allows windows runners to save or restore caches that can be restored or saved respectively on other platforms
+    enableCrossOsArchive: # optional, default is false
+    # Fail the workflow if cache entry is not found
+    fail-on-cache-miss: # optional, default is false
+    # Check if a cache entry exists for the given input(s) (key, restore-keys) without downloading the cache
+    lookup-only: # optional, default is false
+    # Run the post step to save the cache even if another step before fails
+    save-always: # optional, default is false
+    - name: Setup Go environment
+  uses: actions/setup-go@v7.0.0
+  with:
+    # The Go version to download (if necessary) and use. Supports semver spec and ranges. Be sure to enclose this option in single quotation marks.
+    go-version: # optional
+    # Path to the go.mod, go.work, .go-version, or .tool-versions file.
+    go-version-file: # optional
+    # Set this option to true if you want the action to always check for the latest available version that satisfies the version spec
+    check-latest: # optional
+    # Used to pull Go distributions from go-versions. Since there's a default, this is typically not supplied by the user. When running this action on github.com, the default value is sufficient. When running on GHES, you can pass a personal access token for github.com if you are experiencing rate limiting.
+    token: # optional, default is ${{ github.server_url == 'https://github.com' && github.token || '' }}
+    # Used to specify whether caching is needed. Set to true, if you'd like to enable caching.
+    cache: # optional, default is true
+    # Used to specify the path to a dependency file (e.g., go.mod, go.sum)
+    cache-dependency-path: # optional
+    # Target architecture for Go to use. Examples: x86, x64. Will use system architecture by default.
+    architecture: # optional
+    # Custom base URL for downloading Go distributions. Use this to download Go from a mirror or custom source. Defaults to "https://go.dev/dl". Can also be set via the GO_DOWNLOAD_BASE_URL environment variable. The input takes precedence over the environment variable.
+    go-download-base-url: # optional- name: SQLite Cloud - docs search
+  # You may pin to the exact commit or the version.
+  # uses: sqlitecloud/docsearch-action@f3c6771bfa8f770cd0ca621587a4bd8fe92e8049
+  uses: sqlitecloud/docsearch-action@v6
+  with:
+    # The SQLite Cloud project connection string.
+    project-string: 
+    # Your website's documentation base url.
+    base-url: 
+    # The name of the database to use on SQLite Cloud, just remeber to create first a database on your project!
+    database: 
+    # The path of the markdown files, by default it will parse every .md/.mdx file recursively starting from the working directory.
+    path: # optional, default is $(pwd)
+    # If you want to remove html elements from the search set this to true.
+    strip-html: # optional
+    # If you want to remove jsx elements from the search set this to true.
+    strip-jsx: # optional
+    # If you want to avoid redundancy of your markdown titles in the search set this to true.
+    strip-md-titles: # optional
+    # If you use a front matter and you want the action to convert it to json and send it to the cloud make this true.
+    use-front-matter: # optional
+    # Use the slug in the header as the path instead of the relative one.
+    path-using-slug: # optional- name: Code Engine GitHub Action
+  # You may pin to the exact commit or the version.
+  # uses: IBM/code-engine-github-action@397f52bce0731f3c134a3d6ad0d2d8c0f1867a01
+  uses: IBM/code-engine-github-action@v1.3.1
+  with:
+    # IAM API Key used to log into the IBM Cloud
+    api-key: 
+    # An IBM Cloud Resource Group is a logical container used to organize and manage related cloud resources
+    resource-group: # optional
+    # The Region refers to a geographical area where the project is are located
+    region: 
+    # A Code Engine Project Is the grouping of your Apps, Functions and Jobs
+    project: 
+    # The type of component that should be deployed [App, Function, Job, Build]
+    component: 
+    # Name of the App, Function, Job or build
+    name: 
+    # Runtime used for the Function only required for function
+    runtime: # optional
+    # Name of the image that is used for this application
+    image: # optional
+    # Name of the registry secret used to authenticate against the Container registry
+    registry-secret: # optional
+    # Port of the Application
+    port: # optional
+    # Enable trusted profiles
+    trusted-profiles: # optional
+    # path to the directory containing the source code
+    build-source: # optional, default is .
+    # strategy used for building the image ['dockerfile', 'buildpacks']
+    build-strategy: # optional, default is buildpacks
+    # The size to use for the build, which determines the amount of resources used. Valid values include small, medium, large, xlarge, and xxlarge.
+    build-size: # optional, default is medium
+    # CPU configuration set for the component. If not set default Code Engine values are used.
+    cpu: # optional
+    # Memory configuration set for the component. If not set default Code Engine values are used.
+    memory: # optional- name: SQLite Cloud - docs search
+  # You may pin to the exact commit or the version.
+  # uses: sqlitecloud/docsearch-action@f3c6771bfa8f770cd0ca621587a4bd8fe92e8049
+  uses: sqlitecloud/docsearch-action@v6
+  with:
+    # The SQLite Cloud project connection string.
+    project-string: 
+    # Your website's documentation base url.
+    base-url: 
+    # The name of the database to use on SQLite Cloud, just remeber to create first a database on your project!
+    database: 
+    # The path of the markdown files, by default it will parse every .md/.mdx file recursively starting from the working directory.
+    path: # optional, default is $(pwd)
+    # If you want to remove html elements from the search set this to true.
+    strip-html: # optional
+    # If you want to remove jsx elements from the search set this to true.
+    strip-jsx: # optional
+    # If you want to avoid redundancy of your markdown titles in the search set this to true.
+    strip-md-titles: # optional
+    # If you use a front matter and you want the action to convert it to json and send it to the cloud make this true.
+    use-front-matter: # optional
+    # Use the slug in the header as the path instead of the relative one.
+    path-using-slug: # optional- name: Code Engine GitHub Action
+  # You may pin to the exact commit or the version.
+  # uses: IBM/code-engine-github-action@397f52bce0731f3c134a3d6ad0d2d8c0f1867a01
+  uses: IBM/code-engine-github-action@v1.3.1
+  with:
+    # IAM API Key used to log into the IBM Cloud
+    api-key: 
+    # An IBM Cloud Resource Group is a logical container used to organize and manage related cloud resources
+    resource-group: # optional
+    # The Region refers to a geographical area where the project is are located
+    region: 
+    # A Code Engine Project Is the grouping of your Apps, Functions and Jobs
+    project: 
+    # The type of component that should be deployed [App, Function, Job, Build]
+    component: 
+    # Name of the App, Function, Job or build
+    name: 
+    # Runtime used for the Function only required for function
+    runtime: # optional
+    # Name of the image that is used for this application
+    image: # optional
+    # Name of the registry secret used to authenticate against the Container registry
+    registry-secret: # optional
+    # Port of the Application
+    port: # optional
+    # Enable trusted profiles
+    trusted-profiles: # optional
+    # path to the directory containing the source code
+    build-source: # optional, default is .
+    # strategy used for building the image ['dockerfile', 'buildpacks']
+    build-strategy: # optional, default is buildpacks
+    # The size to use for the build, which determines the amount of resources used. Valid values include small, medium, large, xlarge, and xxlarge.
+    build-size: # optional, default is medium
+    # CPU configuration set for the component. If not set default Code Engine values are used.
+    cpu: # optional
+    # Memory configuration set for the component. If not set default Code Engine values are used.
+    memory: # optional- name: Datadog Upload dSYMs
+  # You may pin to the exact commit or the version.
+  # uses: DataDog/upload-dsyms-github-action@d16fd8abd2aea6d5882d820c35b02551763242a3
+  uses: DataDog/upload-dsyms-github-action@v0.4.0
+  with:
+    # Datadog API key.
+    api_key: 
+    # Datadog site region. `datadoghq.com` by default, use `datadoghq.eu` for the EU.
+    site: # optional, default is datadoghq.com
+    # Path to dSYM files. Supports folder and/or zip files.
+    dsym_paths: 
+    # If true, it will run the command without the final step of upload. All other checks are performed.
+    dry_run: # optional- name: Setup Buildless
+  # You may pin to the exact commit or the version.
+  # uses: buildless/setup@30e82389418c7f17046606183bc4c78b2c8913e0
+  uses: buildless/setup@v1.0.2
+  with:
+    # Version
+    version: # optional, default is latest
+    # OS
+    os: # optional
+    # Architecture
+    arch: # optional
+    # Custom install path
+    target: # optional
+    # Force install
+    force: # optional
+    # Export to Path
+    export_path: # optional, default is true
+    # Custom Download URL
+    custom_url: # optional
+    # GitHub Token
+    token: # optional, default is ${{ github.token }}
+    # Enable Buildless Agent
+    agent: # optional, default is true
+    # Buildless API key
+    apikey: # optional
+    # Buildless Tenant
+    tenant: # optional
+    # Buildless Project
+    project: # optional- name: Destroy Environment
+  # You may pin to the exact commit or the version.
+  # uses: parasoft/destroy-environment-action@d743e3bbffd5ff59a19764ae27b8b4c0bed6d4e8
+  uses: parasoft/destroy-environment-action@1.0.2
+  with:
+    # CTP URL
+    ctpUrl: 
+    # CTP Username
+    ctpUsername: 
+    # CTP Password
+    ctpPassword: 
+    # Name of the system
+    system: 
+    # Name of the environment
+    environment: - name: Algorithmia publish-algo
+  # You may pin to the exact commit or the version.
+  # uses: algorithmiaio/publish-algo-action@aca3c2325ce2dc66951f14a88c2caf0c64ea55c4
+  uses: algorithmiaio/publish-algo-action@v0.1.0-rc4
+  with:
+    # your Algorithmia Management API key
+    mgmt_api_key: 
+    # The API address for the Algorithmia Cluster you wish to connect to
+    api_address: # optional, default is https://api.algorithmia.com
+    # The name of this Algorithm on Algorithmia
+    algorithm_name: 
+    # identifier to describe how to promote this release
+    version_schema: # optional, default is minor- name: Buildalon Setup ovr-platform-util
+  # You may pin to the exact commit or the version.
+  # uses: buildalon/setup-ovr-platform-util@3f3bfd4e6d55af476be9f8af167cd3c580f160c4
+  uses: buildalon/setup-ovr-platform-util@v1.2.0
+  with:
+    # Automatically perform self update of ovr-platform-util tool.
+    self-update: # optional, default is true- name: Atlan Action
+  # You may pin to the exact commit or the version.
+  # uses: atlanhq/atlan-action@478a5a84d08a551dbb1ed36cf89bb54d806fee0b
+  uses: atlanhq/atlan-action@v1.0.1
+  with:
+    # GitHub token
+    GITHUB_TOKEN: 
+    # Atlan API token
+    ATLAN_API_TOKEN: 
+    # Atlan instance URL
+    ATLAN_INSTANCE_URL: 
+    # List of environments
+    DBT_ENVIRONMENT_BRANCH_MAP: # optional
+    # Ignore model alias matching
+    IGNORE_MODEL_ALIAS_MATCHING: # optional, default is false
+    # Atlan CLI config file location
+    ATLAN_CONFIG: # optional
